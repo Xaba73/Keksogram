@@ -1,4 +1,4 @@
-function randomNumber(min, max) {
+const randomNumber = (min, max) => {
   if (min < 0 || max < 0) {
     return -1;
   }
@@ -11,4 +11,25 @@ function randomNumber(min, max) {
 
 const stringLengthCheck = (string, counter) => string.length <= counter;
 
-export { randomNumber, stringLengthCheck };
+const makeUniqueNumber = (min, max) => {
+  let uniqueNumberStorage = [];
+
+  return () => {
+    let uniqueNumber = randomNumber(min, max)
+    while (uniqueNumberStorage.includes(uniqueNumber)) {
+      if (uniqueNumberStorage.length >= (max - min + 1)) {
+        throw new Error(`Закончились уникальные числа в диапазоне ${min} - ${max}`)
+      }
+
+      uniqueNumber = randomNumber(min, max);
+    }
+    uniqueNumberStorage.push(uniqueNumber);
+    return uniqueNumber;
+  }
+}
+
+
+
+
+
+export { randomNumber, stringLengthCheck, makeUniqueNumber };

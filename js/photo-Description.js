@@ -1,4 +1,4 @@
-import { randomNumber } from './util.js';
+import { randomNumber, makeUniqueNumber } from './util.js';
 const LikesCount = {
   min: 15,
   max: 200,
@@ -50,13 +50,13 @@ const DECRIPTIONS_PHOTO = [
   'Ярко',
 ];
 
-
+const getUniqueNumberForIdComments = makeUniqueNumber(1, 999);
 
 function makeComments() {
   let comments = [];
   for (let i = 0; i < randomNumber(CommentsCount.min, CommentsCount.max); i++) {
     let comment = {
-      id: randomNumber(1, 999),
+      id: getUniqueNumberForIdComments(),
       avatar: 'img/avatar-' + randomNumber(AvatarCount.min, AvatarCount.max) + '.svg',
       message: COMMENTS[randomNumber(0, COMMENTS.length - 1)],
       name: NAMES[randomNumber(0, NAMES.length - 1)],
