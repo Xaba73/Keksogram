@@ -1,5 +1,6 @@
 'use strict';
-import { addPhotoDescriptions } from './photo-Description.js'
+import { addPhotoDescriptions } from './photo-data.js';
+import { renderPictures } from './pictures.js';
 
 
-console.log(addPhotoDescriptions());
+renderPictures();
