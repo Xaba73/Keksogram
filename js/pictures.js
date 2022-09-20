@@ -9,6 +9,8 @@ function fillingPictureDate(photoObject) {
   userPicture.querySelector('.picture__img').src = photoObject.url;
   userPicture.querySelector('.picture__likes').textContent = photoObject.likes;
   userPicture.querySelector('.picture__comments').textContent = photoObject.comments.length;
+  userPicture.comments = photoObject.comments;
+  userPicture.description = photoObject.description;
   return userPicture;
 }
 

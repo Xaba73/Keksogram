@@ -28,8 +28,10 @@ const makeUniqueNumber = (min, max) => {
   }
 }
 
+const isEscEvent = (evt) => {
+  return evt.key === 'Escape' || evt.key === 'Esc';
+};
 
 
 
-
-export { randomNumber, stringLengthCheck, makeUniqueNumber };
+export { randomNumber, stringLengthCheck, makeUniqueNumber, isEscEvent };
