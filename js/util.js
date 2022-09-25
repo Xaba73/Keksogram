@@ -1,3 +1,8 @@
+const escKey = {
+  ESC: 'Esc',
+  ESCAPE: 'Escape',
+}
+
 const randomNumber = (min, max) => {
   if (min < 0 || max < 0) {
     return -1;
@@ -29,7 +34,7 @@ const makeUniqueNumber = (min, max) => {
 }
 
 const isEscEvent = (evt) => {
-  return evt.key === 'Escape' || evt.key === 'Esc';
+  return evt.key === escKey.ESCAPE || evt.key === escKey.ESC;
 };
 
 

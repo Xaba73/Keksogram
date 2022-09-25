@@ -1,4 +1,4 @@
-import {isEscEvent} from './util.js';
+import { isEscEvent } from './util.js';
 const bigPictureSection = document.querySelector('.big-picture')
 const bigPictureImg = bigPictureSection.querySelector('.big-picture__img').querySelector('img');
 const pictures = document.querySelectorAll('.picture');
@@ -39,7 +39,7 @@ pictures.forEach((picture) => {
   })
 })
 // Фуннкция составляет комментарий
-function makeComment(commentObject){
+function makeComment(commentObject) {
   const commentTemplate = document.querySelector('#comment').content;
   let userComment = commentTemplate.cloneNode(true);
 
@@ -54,7 +54,7 @@ function makeComment(commentObject){
 }
 
 //Функция отображает комментарии под большим фото
-function renderComment (commentsArray) {
+function renderComment(commentsArray) {
   commentsArray.forEach(comment => {
     let userCommentValue = makeComment(comment);
     commentsContainer.appendChild(userCommentValue);
@@ -62,18 +62,19 @@ function renderComment (commentsArray) {
 }
 
 //Закрытие большого окна кнопкой
-const closeButton = bigPictureSection.querySelector('.big-picture__cancel');
-closeButton.addEventListener('click', () => {
+
+function closeBigPucture() {
   bigPictureSection.classList.add('hidden');
   body.classList.remove('modal-open');
   commentsContainer.innerHTML = '';
+}
 
-})
+const closeButton = bigPictureSection.querySelector('.big-picture__cancel');
+closeButton.addEventListener('click', closeBigPucture)
 
-body.addEventListener('keydown', (evt)=>{
-  if (isEscEvent(evt)){
-    bigPictureSection.classList.add('hidden');
-    body.classList.remove('modal-open');
-    commentsContainer.innerHTML = '';
+body.addEventListener('keydown', (evt) => {
+  if (isEscEvent(evt)) {
+    closeBigPucture();
   }
 })
+
