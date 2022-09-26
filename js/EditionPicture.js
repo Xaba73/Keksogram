@@ -12,7 +12,7 @@ const imagePreview = document.querySelector('.img-upload__preview > img');
 
 function changeScaleValue(evt) {
   let scale;
-  if (evt.path[0].classList.contains('scale__control--bigger')) {
+  if (evt.target.classList.contains('scale__control--bigger')) {
     scale = parseInt(scaleControlValue.value, 10) + ScaleValues.STEP;
   } else {
     scale = parseInt(scaleControlValue.value, 10) - ScaleValues.STEP
@@ -52,45 +52,50 @@ spanList.forEach((element) => {
 })
 
 
-// effectsList.addEventListener('click', (evt) => {
-//   let target = evt.target.querySelector('.effects__preview');
-//   console.log(target);
-//   changePictureEffect(target);
-// });
 function clearEffect() {
   imagePreview.className = '';
 }
 
 function changePictureEffect(element) {
+  clearEffect();
+  if (element.classList.contains('effects__preview--none')){
+    sliderBarContainer.classList.add('hidden');
+  } else {
+    sliderBarContainer.classList.remove('hidden');
+  }
+  console.log(element.classList);
   if (element.classList.contains('effects__preview--none')) {
-    clearEffect();
     imagePreview.classList.add('effects__preview--none');
+
   }
   if (element.classList.contains('effects__preview--chrome')) {
-    clearEffect();
     imagePreview.classList.add('effects__preview--chrome');
   }
   if (element.classList.contains('effects__preview--sepia')) {
-    clearEffect();
     imagePreview.classList.add('effects__preview--sepia');
   }
   if (element.classList.contains('effects__preview--marvin')) {
-    clearEffect();
     imagePreview.classList.add('effects__preview--marvin');
   }
   if (element.classList.contains('effects__preview--phobos')) {
-    clearEffect();
     imagePreview.classList.add('effects__preview--phobos');
   }
   if (element.classList.contains('effects__preview--heat')) {
-    clearEffect();
     imagePreview.classList.add('effects__preview--heat');
   }
 }
 
+//Настройка Слайдера для изображений
 
-// let chromeEffectButton = document.querySelector('#effect-chrome');
-// chromeEffectButton.addEventListener('change', () => {
-//   imagePreview.classList.add(`effects__preview--${effects.CHROME}`);
-// })
-export { changeScaleValues }
+const sliderBar = document.querySelector('.effect-level__slider');
+const sliderBarContainer = document.querySelector('.img-upload__effect-level');
+noUiSlider.create(sliderBar, {
+  range: {
+    min: 20,
+    max: 100,
+  },
+  start: 50,
+  connect: 'lower',
+});
+
+export { changeScaleValues, clearEffect, scaleControlValue, imagePreview, sliderBarContainer }
