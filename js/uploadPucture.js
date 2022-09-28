@@ -1,12 +1,13 @@
-import { clearEffect, scaleControlValue, imagePreview, sliderBarContainer  } from './EditionPicture.js';
+import { clearEffect, scaleControlValue, imagePreview, sliderBarContainer } from './EditionPicture.js';
 import { isEscEvent } from './util.js';
+import { hashtagsField, commentField } from './validation.js';
 const uploadStart = document.querySelector('.img-upload__overlay');
 const uploadFileInput = document.querySelector('.img-upload__input');
 const body = document.querySelector('body');
 
 
 // Загрузка фотографии пользователя для редактирования
-function downloadingUsersPicture (){
+function downloadingUsersPicture() {
   uploadFileInput.addEventListener('change', () => {
     uploadStart.classList.remove('hidden');
     body.classList.add('modal-open');
@@ -17,6 +18,7 @@ function downloadingUsersPicture (){
 
 
 //Закрытие формы редактирования фотографии
+const closeUploadFormButton = document.querySelector('.img-upload__cancel');
 
 function closeUploadForm() {
   uploadStart.classList.add('hidden');
@@ -25,18 +27,19 @@ function closeUploadForm() {
   clearEffect();
   scaleControlValue.value = '100%';
   imagePreview.style.transform = 'scale(1)';
+  hashtagsField.value = '';
+  commentField.value = '';
+
 }
-
-const closeUploadFormButton = document.querySelector('.img-upload__cancel');
-
-closeUploadFormButton.addEventListener('click', closeUploadForm);
-body.addEventListener('keydown', (evt) => {
+function closeUploadFormOnEsc(evt) {
   if (isEscEvent(evt)) {
     closeUploadForm();
   }
+}
 
-});
+closeUploadFormButton.addEventListener('click', closeUploadForm);
+body.addEventListener('keydown', closeUploadFormOnEsc);
 
 
 
-export { downloadingUsersPicture };
+export { downloadingUsersPicture, closeUploadFormOnEsc, body };

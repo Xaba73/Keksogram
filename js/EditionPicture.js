@@ -5,10 +5,10 @@ const ScaleValues = {
 }
 
 const EffectsMethods = {
-  CHROME: ()=>{
+  CHROME: () => {
     returnDefaultSlider();
     imagePreview.classList.add('effects__preview--chrome');
-    sliderBar.noUiSlider.on('update',(_,handel, unencoded) =>{
+    sliderBar.noUiSlider.on('update', (_, handel, unencoded) => {
       sliderEffectLevel.value = unencoded[handel];
       imagePreview.style.filter = `grayscale(${sliderEffectLevel.value})`;
     });
@@ -17,7 +17,7 @@ const EffectsMethods = {
   SEPIA: () => {
     returnDefaultSlider();
     imagePreview.classList.add('effects__preview--sepia');
-    sliderBar.noUiSlider.on('update',(_,handel, unencoded) =>{
+    sliderBar.noUiSlider.on('update', (_, handel, unencoded) => {
       sliderEffectLevel.value = unencoded[handel];
       imagePreview.style.filter = `sepia(${sliderEffectLevel.value})`;
     });
@@ -33,7 +33,7 @@ const EffectsMethods = {
       start: 100,
       step: 1,
     });
-    sliderBar.noUiSlider.on('update',(_,handel, unencoded) =>{
+    sliderBar.noUiSlider.on('update', (_, handel, unencoded) => {
       sliderEffectLevel.value = unencoded[handel];
       imagePreview.style.filter = `invert(${sliderEffectLevel.value}%)`;
     });
@@ -49,7 +49,7 @@ const EffectsMethods = {
       start: 3,
       step: 0.1,
     });
-    sliderBar.noUiSlider.on('update',(_,handel, unencoded) =>{
+    sliderBar.noUiSlider.on('update', (_, handel, unencoded) => {
       sliderEffectLevel.value = unencoded[handel];
       imagePreview.style.filter = `blur(${sliderEffectLevel.value}px)`;
     });
@@ -65,7 +65,7 @@ const EffectsMethods = {
       start: 3,
       step: 0.1,
     });
-    sliderBar.noUiSlider.on('update',(_,handel, unencoded) =>{
+    sliderBar.noUiSlider.on('update', (_, handel, unencoded) => {
       sliderEffectLevel.value = unencoded[handel];
       imagePreview.style.filter = `brightness(${sliderEffectLevel.value})`;
     });
@@ -129,7 +129,7 @@ function clearEffect() {
 function changePictureEffect(element) {
   clearEffect();
 
-  if (element.classList.contains('effects__preview--none')){
+  if (element.classList.contains('effects__preview--none')) {
     sliderBarContainer.classList.add('hidden');
   } else {
     sliderBarContainer.classList.remove('hidden');
@@ -167,7 +167,7 @@ const sliderBarContainer = document.querySelector('.img-upload__effect-level');
 const sliderEffectLevel = document.querySelector('.effect-level__value');
 
 
-noUiSlider.create(sliderBar, {
+window.noUiSlider.create(sliderBar, {
   range: {
     min: 0,
     max: 1,
@@ -178,7 +178,7 @@ noUiSlider.create(sliderBar, {
 });
 
 
-function returnDefaultSlider(){
+function returnDefaultSlider() {
   sliderBar.noUiSlider.updateOptions({
     range: {
       min: 0,
