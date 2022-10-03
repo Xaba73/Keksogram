@@ -1,7 +1,6 @@
 import { isEscEvent } from './util.js';
 const bigPictureSection = document.querySelector('.big-picture')
 const bigPictureImg = bigPictureSection.querySelector('.big-picture__img').querySelector('img');
-const pictures = document.querySelectorAll('.picture');
 const likeCountBigPicture = document.querySelector('.likes-count');
 const commentsCountBigPicture = document.querySelector('.comments-count');
 const socialCaptionBigBicture = document.querySelector('.social__caption');
@@ -18,26 +17,29 @@ commentLoader.classList.add('hidden');
 
 // Заменяет большое изображение и все данные к нему
 
-pictures.forEach((picture) => {
+function renderBigPicture (){
+  let pictures = document.querySelectorAll('a.picture')
+  pictures.forEach((picture) => {
 
-  let userPicture = picture.querySelector('img');
-  let likesNumber = picture.querySelector('.picture__likes');
-  let commentsCount = picture.querySelector('.picture__comments');
-
-
-  userPicture.addEventListener('click', () => {
-
-    bigPictureSection.classList.remove('hidden');
-    bigPictureImg.src = userPicture.src;
-    likeCountBigPicture.textContent = likesNumber.textContent;
-    commentsCountBigPicture.textContent = commentsCount.textContent;
-    socialCaptionBigBicture.textContent = picture.description;
-    renderComment(picture.comments);
+    let userPicture = picture.querySelector('img');
+    let likesNumber = picture.querySelector('.picture__likes');
+    let commentsCount = picture.querySelector('.picture__comments');
 
 
-    body.classList.add('modal-open');
+    userPicture.addEventListener('click', (evt) => {
+      evt.preventDefault();
+      bigPictureSection.classList.remove('hidden');
+      bigPictureImg.src = userPicture.src;
+      likeCountBigPicture.textContent = likesNumber.textContent;
+      commentsCountBigPicture.textContent = commentsCount.textContent;
+      socialCaptionBigBicture.textContent = picture.description;
+      renderComment(picture.comments);
+      body.classList.add('modal-open');
+    })
   })
-})
+}
+
+
 // Фуннкция составляет комментарий
 function makeComment(commentObject) {
   const commentTemplate = document.querySelector('#comment').content;
@@ -78,3 +80,4 @@ body.addEventListener('keydown', (evt) => {
   }
 })
 
+export {renderBigPicture}

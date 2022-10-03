@@ -1,8 +1,5 @@
-import { addPhotoDescriptions } from './photo-data.js';
-
 const templatePicture = document.querySelector('#picture').content.querySelector('.picture');
 const picturesContainer = document.querySelector('.pictures');
-const photosDate = addPhotoDescriptions();
 
 function fillingPictureDate(photoObject) {
   const userPicture = templatePicture.cloneNode(true);
@@ -14,16 +11,16 @@ function fillingPictureDate(photoObject) {
   return userPicture;
 }
 
-function renderPictures() {
+function renderPictures(serverPhotoDate) {
   let picture = document.createDocumentFragment();
 
-  photosDate.forEach((photo) => {
+  serverPhotoDate.forEach((photo) => {
     picture.appendChild(fillingPictureDate(photo));
   });
   picturesContainer.appendChild(picture);
 }
 
-export { renderPictures, photosDate };
+export { renderPictures };
 
 
 
