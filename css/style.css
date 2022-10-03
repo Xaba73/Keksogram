@@ -1417,6 +1417,6 @@ main {
   display: none;
 }
 
-input:valid {
-  border: 3px solid red;
+input:invalid {
+  border: 5px solid red;
 }

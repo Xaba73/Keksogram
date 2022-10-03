@@ -17,7 +17,7 @@ commentLoader.classList.add('hidden');
 
 // Заменяет большое изображение и все данные к нему
 
-function renderBigPicture (){
+function renderBigPicture() {
   let pictures = document.querySelectorAll('a.picture')
   pictures.forEach((picture) => {
 
@@ -80,4 +80,4 @@ body.addEventListener('keydown', (evt) => {
   }
 })
 
-export {renderBigPicture}
+export { renderBigPicture }

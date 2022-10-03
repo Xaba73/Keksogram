@@ -1,15 +1,17 @@
-import { hashtagsField } from './validation.js';
-
 const uploadForm = document.querySelector('.img-upload__form');
-console.log(uploadForm);
 
-function submitingForm(){
+
+function submitingForm(closeUploadForm) {
   uploadForm.addEventListener('submit', (evt) => {
-    if(hashtagsField){
-      console.log(hashtagsField)
-    }
     evt.preventDefault();
-    console.log('click')
+    const formData = new FormData(evt.target);
+
+    fetch('https://23.javascript.pages.academy/kekstagram',
+      {
+        method: 'POST',
+        body: formData,
+      },
+    ).then(() => closeUploadForm());
   })
 }
 
@@ -20,4 +22,4 @@ function submitingForm(){
 
 
 
-export {submitingForm}
+export { submitingForm }

@@ -25,7 +25,7 @@ function closeUploadForm() {
   body.classList.remove('modal-open');
   uploadFileInput.value = null;
   clearEffect();
-  scaleControlValue.value = '100%';
+  scaleControlValue.value = '1';
   imagePreview.style.transform = 'scale(1)';
   hashtagsField.value = '';
   commentField.value = '';
@@ -42,4 +42,4 @@ body.addEventListener('keydown', closeUploadFormOnEsc);
 
 
 
-export { downloadingUsersPicture, closeUploadFormOnEsc, body };
+export { downloadingUsersPicture, closeUploadFormOnEsc, body, closeUploadForm };
