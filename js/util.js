@@ -37,6 +37,19 @@ const isEscEvent = (evt) => {
   return evt.key === escKey.ESCAPE || evt.key === escKey.ESC;
 };
 
+const DEBOUNCE_INTERVAL = 1000;
+const debounce = (cb) => {
+  let lastTimeout = null;
+  return (...args) => {
+    if (lastTimeout) {
+      window.clearTimeout(lastTimeout);
+    }
+    lastTimeout = window.setTimeout(() => {
+      cb(...args);
+    }, DEBOUNCE_INTERVAL);
+  };
+};
 
 
-export { randomNumber, stringLengthCheck, makeUniqueNumber, isEscEvent };
+
+export { randomNumber, stringLengthCheck, makeUniqueNumber, isEscEvent, debounce };
