@@ -1,8 +1,6 @@
-import { randomNumber } from './util.js';
+import { randomNumber, debounce_leading, debounce, debounce2 } from './util.js';
 import { renderPictures } from './pictures.js';
 import { renderBigPicture } from './big-picture.js';
-import { debounce } from './util.js';
-
 const COUNT_RANDOM_PHOTO = 10;
 
 const filtersSection = document.querySelector('.img-filters');
@@ -13,6 +11,19 @@ const discussedFilterButton = document.querySelector('#filter-discussed');
 function showFilters() {
   filtersSection.classList.remove('img-filters--inactive');
 }
+
+
+//Фильтр  по умолчанию
+
+function renderDefaultPhoto(data) {
+  defaultFilterButton.addEventListener('click', (evt) => {
+    changeFilter(evt);
+    renderPictures(data);
+    renderBigPicture();
+  })
+
+}
+
 //Фильтр случайный фотографий
 function getRandomPhoto(data) {
   let arrayForRender = []
@@ -28,21 +39,13 @@ function getRandomPhoto(data) {
 
 function renderRandomPhoto(data) {
   randomFilterButton.addEventListener('click', (evt) => {
+    const renderRandomPhotoWithDebounce = debounce2(() => renderPictures(getRandomPhoto(data)))
     changeFilter(evt);
-    renderPictures(getRandomPhoto(data));
+    renderRandomPhotoWithDebounce();
     renderBigPicture();
   })
 }
-//Фильтр  по умолчанию
 
-function renderDefaultPhoto(data) {
-  defaultFilterButton.addEventListener('click', (evt) => {
-    changeFilter(evt);
-    renderPictures(data);
-    renderBigPicture();
-  })
-
-}
 //Фильтр самых обсуждаемых фотографий
 function getDiscussedPhoto(data) {
   let arrayForRender = data.slice();
@@ -86,5 +89,7 @@ function addFilter(data) {
   renderDefaultPhoto(data);
   renderDiscussedPhoto(data);
 }
+
+
 
 export { showFilters, addFilter }
