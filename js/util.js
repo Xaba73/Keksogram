@@ -37,33 +37,10 @@ const isEscEvent = (evt) => {
   return evt.key === escKey.ESCAPE || evt.key === escKey.ESC;
 };
 
-function debounce_leading(func, timeout = 1000) {
-  let timer;
-  return (...args) => {
-    if (!timer) {
-      func.apply(this, args);
-    }
-    clearTimeout(timer);
-    timer = setTimeout(() => {
-      timer = undefined;
-    }, timeout);
-  };
-}
 
-const DEBOUNCE_INTERVAL = 1000;
-const debounce = (cb) => {
-  let lastTimeout = null;
-  return (...args) => {
-    if (lastTimeout) {
-      window.clearTimeout(lastTimeout);
-    }
-    lastTimeout = window.setTimeout(() => {
-      cb(...args);
-    }, DEBOUNCE_INTERVAL);
-  };
-};
+const DEBOUNCE_DELAY = 500;
 
-function debounce2(func, timeout = 2000) {
+function debounce(func, timeout = DEBOUNCE_DELAY) {
   let timer;
   return (...args) => {
     clearTimeout(timer);
@@ -71,4 +48,4 @@ function debounce2(func, timeout = 2000) {
   };
 }
 
-export { randomNumber, stringLengthCheck, makeUniqueNumber, isEscEvent, debounce_leading, debounce, debounce2 };
+export { randomNumber, stringLengthCheck, makeUniqueNumber, isEscEvent, debounce };

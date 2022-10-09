@@ -1,4 +1,4 @@
-import { randomNumber, debounce_leading, debounce, debounce2 } from './util.js';
+import { randomNumber, debounce } from './util.js';
 import { renderPictures } from './pictures.js';
 import { renderBigPicture } from './big-picture.js';
 const COUNT_RANDOM_PHOTO = 10;
@@ -38,8 +38,8 @@ function getRandomPhoto(data) {
 }
 
 function renderRandomPhoto(data) {
+  const renderRandomPhotoWithDebounce = debounce(() => renderPictures(getRandomPhoto(data)))
   randomFilterButton.addEventListener('click', (evt) => {
-    const renderRandomPhotoWithDebounce = debounce2(() => renderPictures(getRandomPhoto(data)))
     changeFilter(evt);
     renderRandomPhotoWithDebounce();
     renderBigPicture();
@@ -56,9 +56,10 @@ function getDiscussedPhoto(data) {
 }
 
 function renderDiscussedPhoto(data) {
+  const renderDiscussedPhotoWithDebounce = debounce(() => renderPictures(getDiscussedPhoto(data)))
   discussedFilterButton.addEventListener('click', (evt) => {
     changeFilter(evt);
-    renderPictures(getDiscussedPhoto(data));
+    renderDiscussedPhotoWithDebounce();
     renderBigPicture();
   })
 }
