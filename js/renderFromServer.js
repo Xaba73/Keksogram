@@ -1,5 +1,4 @@
 import { renderPictures } from './pictures.js';
-import { renderBigPicture } from './big-picture.js';
 import { showFilters, addFilter } from './pictures-filters.js';
 
 fetch('https://23.javascript.pages.academy/kekstagram/data')
@@ -8,7 +7,6 @@ fetch('https://23.javascript.pages.academy/kekstagram/data')
     renderPictures(serverPhotoDate);
     showFilters();
     addFilter(serverPhotoDate);
-    renderBigPicture();
   })
 
 

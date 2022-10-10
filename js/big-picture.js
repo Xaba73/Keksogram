@@ -6,14 +6,12 @@ const commentsCountBigPicture = document.querySelector('.comments-count');
 const socialCaptionBigBicture = document.querySelector('.social__caption');
 const commentsContainer = document.querySelector('.big-picture__social').querySelector('.social__comments');
 const body = document.querySelector('body');
-
-
-
-// Скрыть лишние элементы
-const userCommentCount = document.querySelector('.social__comment-count');
+const showedComments = document.querySelector('.social__comments-count--showed');
 const commentLoader = document.querySelector('.comments-loader');
-userCommentCount.classList.add('hidden');
-commentLoader.classList.add('hidden');
+const COMMENTS_COUNT = {
+  Start: 5,
+  Step: 5,
+}
 
 // Заменяет большое изображение и все данные к нему
 
@@ -33,6 +31,10 @@ function renderBigPicture() {
       likeCountBigPicture.textContent = likesNumber.textContent;
       commentsCountBigPicture.textContent = commentsCount.textContent;
       socialCaptionBigBicture.textContent = picture.description;
+      showedComments.textContent = COMMENTS_COUNT.Start;
+      if(picture.comments.length < COMMENTS_COUNT.Start){
+        showedComments.textContent = picture.comments.length;
+      }
       renderComment(picture.comments);
       body.classList.add('modal-open');
     })
@@ -57,10 +59,27 @@ function makeComment(commentObject) {
 
 //Функция отображает комментарии под большим фото
 function renderComment(commentsArray) {
-  commentsArray.forEach(comment => {
+  let firstCommentArray = commentsArray.slice(0, COMMENTS_COUNT.Start);
+  renderPartComment(firstCommentArray);
+
+  let commentCountStart = COMMENTS_COUNT.Start;
+  let commentCountStep = COMMENTS_COUNT.Step;
+
+  commentLoader.addEventListener ('click', () => {
+    let afterLoadCommentArray  = commentsArray.slice(commentCountStart, commentCountStart + commentCountStep);
+    renderPartComment(afterLoadCommentArray);
+    commentCountStart += commentCountStep;
+    let commentsCounter = document.querySelectorAll('.social__comment');
+    showedComments.textContent = commentsCounter.length;
+    console.log('123');
+  });
+}
+
+function renderPartComment(commentArray){
+  commentArray.forEach(comment => {
     let userCommentValue = makeComment(comment);
     commentsContainer.appendChild(userCommentValue);
-  })
+  });
 }
 
 //Закрытие большого окна кнопкой

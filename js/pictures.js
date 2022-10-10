@@ -1,3 +1,4 @@
+import { renderBigPicture } from './big-picture.js';
 const templatePicture = document.querySelector('#picture').content.querySelector('.picture');
 const picturesContainer = document.querySelector('.pictures');
 
@@ -18,6 +19,7 @@ function renderPictures(serverPhotoDate) {
     picture.appendChild(fillingPictureDate(photo));
   });
   picturesContainer.appendChild(picture);
+  renderBigPicture();
 }
 
 export { renderPictures };

@@ -1,6 +1,5 @@
 import { randomNumber, debounce } from './util.js';
 import { renderPictures } from './pictures.js';
-import { renderBigPicture } from './big-picture.js';
 const COUNT_RANDOM_PHOTO = 10;
 
 const filtersSection = document.querySelector('.img-filters');
@@ -19,7 +18,6 @@ function renderDefaultPhoto(data) {
   defaultFilterButton.addEventListener('click', (evt) => {
     changeFilter(evt);
     renderPictures(data);
-    renderBigPicture();
   })
 
 }
@@ -42,7 +40,6 @@ function renderRandomPhoto(data) {
   randomFilterButton.addEventListener('click', (evt) => {
     changeFilter(evt);
     renderRandomPhotoWithDebounce();
-    renderBigPicture();
   })
 }
 
@@ -60,7 +57,6 @@ function renderDiscussedPhoto(data) {
   discussedFilterButton.addEventListener('click', (evt) => {
     changeFilter(evt);
     renderDiscussedPhotoWithDebounce();
-    renderBigPicture();
   })
 }
 
