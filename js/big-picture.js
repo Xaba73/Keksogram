@@ -4,7 +4,8 @@ const bigPictureImg = bigPictureSection.querySelector('.big-picture__img').query
 const likeCountBigPicture = document.querySelector('.likes-count');
 const commentsCountBigPicture = document.querySelector('.comments-count');
 const socialCaptionBigBicture = document.querySelector('.social__caption');
-const commentsContainer = document.querySelector('.big-picture__social').querySelector('.social__comments');
+const bigPictureDiv = document.querySelector('.big-picture__social');
+const commentsContainer = bigPictureDiv.querySelector('.social__comments');
 const body = document.querySelector('body');
 const showedComments = document.querySelector('.social__comments-count--showed');
 const commentLoader = document.querySelector('.comments-loader');
@@ -18,12 +19,9 @@ const COMMENTS_COUNT = {
 function renderBigPicture() {
   let pictures = document.querySelectorAll('a.picture')
   pictures.forEach((picture) => {
-
     let userPicture = picture.querySelector('img');
     let likesNumber = picture.querySelector('.picture__likes');
     let commentsCount = picture.querySelector('.picture__comments');
-
-
     userPicture.addEventListener('click', (evt) => {
       evt.preventDefault();
       bigPictureSection.classList.remove('hidden');
@@ -37,7 +35,8 @@ function renderBigPicture() {
       }
       renderComment(picture.comments);
       body.classList.add('modal-open');
-    })
+    });
+
   })
 }
 
@@ -58,22 +57,30 @@ function makeComment(commentObject) {
 }
 
 //Функция отображает комментарии под большим фото
+
 function renderComment(commentsArray) {
   let firstCommentArray = commentsArray.slice(0, COMMENTS_COUNT.Start);
   renderPartComment(firstCommentArray);
-
   let commentCountStart = COMMENTS_COUNT.Start;
   let commentCountStep = COMMENTS_COUNT.Step;
-
   commentLoader.addEventListener ('click', () => {
     let afterLoadCommentArray  = commentsArray.slice(commentCountStart, commentCountStart + commentCountStep);
     renderPartComment(afterLoadCommentArray);
     commentCountStart += commentCountStep;
     let commentsCounter = document.querySelectorAll('.social__comment');
     showedComments.textContent = commentsCounter.length;
-    console.log('123');
   });
+
 }
+
+// commentLoader.addEventListener ('click', () => {
+//   let afterLoadCommentArray  = commentsArray.slice(commentCountStart, commentCountStart + commentCountStep);
+//   renderPartComment(afterLoadCommentArray);
+//   commentCountStart += commentCountStep;
+//   let commentsCounter = document.querySelectorAll('.social__comment');
+//   showedComments.textContent = commentsCounter.length;
+//   console.log('123');
+// });
 
 function renderPartComment(commentArray){
   commentArray.forEach(comment => {

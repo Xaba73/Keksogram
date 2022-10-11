@@ -4,6 +4,7 @@ import { changeScaleValues } from './EditionPicture.js';
 import { validation } from './validation.js';
 import './renderFromServer.js';
 import { submitingForm, showSuccessMessage, showErrorMessage } from './submissionForm.js';
+import './userPhotos.js';
 
 downloadingUsersPicture();
 changeScaleValues();
