@@ -25,6 +25,7 @@ function renderBigPicture() {
     userPicture.addEventListener('click', (evt) => {
       evt.preventDefault();
       bigPictureSection.classList.remove('hidden');
+      commentLoader.classList.remove('hidden');
       bigPictureImg.src = userPicture.src;
       likeCountBigPicture.textContent = likesNumber.textContent;
       commentsCountBigPicture.textContent = commentsCount.textContent;
@@ -69,18 +70,13 @@ function renderComment(commentsArray) {
     commentCountStart += commentCountStep;
     let commentsCounter = document.querySelectorAll('.social__comment');
     showedComments.textContent = commentsCounter.length;
+    if (commentsArray.length === commentsCounter.length){
+      commentLoader.classList.add('hidden');
+    }
   });
 
 }
 
-// commentLoader.addEventListener ('click', () => {
-//   let afterLoadCommentArray  = commentsArray.slice(commentCountStart, commentCountStart + commentCountStep);
-//   renderPartComment(afterLoadCommentArray);
-//   commentCountStart += commentCountStep;
-//   let commentsCounter = document.querySelectorAll('.social__comment');
-//   showedComments.textContent = commentsCounter.length;
-//   console.log('123');
-// });
 
 function renderPartComment(commentArray){
   commentArray.forEach(comment => {
